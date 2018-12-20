@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <link rel="stylesheet" href="Styles/menu.css">
+   <link rel="stylesheet" href="Styles/grid.css">
+   <title>Dots N Boxes</title>
+</head>
+
+<body>
+   <div id="body-title">Dots n Boxes</div>
+   <form class="container" id="form-menu">
+      <div id="form-menu-row-1">
+         <div></div>
+         <div>
+            <label for="size-drop-down">Grid Size:</label>
+            <select id="size-drop-down">
+               <option selected value="2">2 x 2</option>
+               <option value="3">3 x 3</option>
+               <option value="4">4 x 4</option>
+               <option value="5">5 x 5</option>
+               <option value="6">6 x 6</option>
+               <option value="7">7 x 7</option>
+               <option value="8">8 x 8</option>
+               <option value="9">9 x 9</option>
+            </select>
+         </div>
+         <div></div>
+         <input type="button" id="begin-game-btn" value="Begin Game">
+         <div></div>
+         <input type="button" id="reset-btn" value="Reset">
+         <div></div>
+      </div>
+      <div id="form-menu-row-2">
+         <div></div>
+         <input type="text" spellcheck="false" id="player-1-input" minlength="2" maxlength="10" value="PlayerOne">
+         <div></div>
+         <input type="text" spellcheck="false" id="player-2-input" minlength="2" maxlength="10" value="PlayerTwo">
+         <div></div>
+      </div>
+   </form>
+   <div id=div-grid>
+
+   </div>
+   <div class="container">
+      <h3 id="player-turn">
+         Score
+      </h3>
+      <br>
+      <div class="player-score">
+         <div id="player-1-score" >
+            PlayerOne: 0
+         </div>
+         <div id="player-2-score">
+            PlayerTwo: 0
+         </div>
+      </div>
+   </div>
+   <div id="test">test stuff</div>
+</body>
+
+<script src="Scripts/GameLogic.js"></script>
+<script src="Scripts/FindBoxAndLineIndexes.js"></script>
+<script src="Scripts/ConstructGrid.js"></script>
+<script src="Scripts/Menu.js"></script>
+<script src="Scripts/Main.js"></script>
+
+</html>
