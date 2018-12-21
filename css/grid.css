@@ -1,0 +1,78 @@
+.test-grid {
+   margin: 10px auto;
+   /* border: 2px solid black; */
+   border-radius: 25px;
+   display: flex;
+   box-sizing: border-box;
+   width: 90%;
+   padding:5px 0;
+   flex-direction: column;
+}
+
+.grid-h-row {
+   display: flex;
+   justify-content: center;
+   /* align-items: center; */
+   /* border: 1px solid orange; */
+   width: 90%;
+   height: 15px;
+   margin: 0 auto;
+}
+
+.grid-v-row {
+   display: flex;
+   justify-content: center;
+   /* border: 1px solid blue; */
+   width: 90%;
+   height: 60px;
+   margin: 0 auto;
+}
+
+.grid-h-col {
+   border-radius: 25px;
+   width: 60px;
+   /* border: 1px solid green; */
+   background-color: rgb(245, 245, 245);
+}
+
+.grid-v-col {
+   border-radius: 25px;
+   width: 15px;
+   /* border: 1px solid red; */
+   background-color: rgb(245, 245, 245);
+}
+
+.grid-h-col:hover {
+   border-radius: 25px;
+   width: 60px;
+   border: 2px solid black;
+   background-color: rgb(245, 245, 245);
+}
+
+.grid-v-col:hover {
+   border-radius: 25px;
+   width: 15px;
+   border: 2px solid black;
+   background-color: rgb(245, 245, 245);
+}
+
+.player-turn {
+   background-color: lightgray;
+}
+
+.grid-dot {
+   /* border: 1px solid black; */
+   background-color: black;
+   border-radius: 50%;
+   height: 15px;
+   width: 15px;
+
+}
+
+.grid-box {
+   border-radius: 7px;
+   /* border: 1px solid purple; */
+   background-color: white;
+   /* height: 30px; */
+   width: 60px;
+}

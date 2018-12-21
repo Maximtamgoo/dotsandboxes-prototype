@@ -15,54 +15,18 @@ class Menu {
    SizeDropDown(e) {
       gridObj.gridSize = Number(e.target.value)
       gridObj.BuildGrid_HTML()
-      gridObj.BuildGrid_CSS()
    }
 
    BeginGame() {
       console.log('BeginGame()')
-      let validation = menuObj.ValidatePlayerNames()
-      if (validation == true) {
-         menuObj.DisableMenuParts(true)
-         console.log('validation true')
-         gameLogic.SetCurrentPlayer(1, menuObj.p1Name.value, 'red')
-         gameLogic.CreateCoordinatesListener()
-      }
+      menuObj.DisableMenuParts()
+      gameLogic.SetCurrentPlayer(1, 'Player One', 'orange')
+      gameLogic.CreateCoordinatesListener()
+
    }
 
-   ValidatePlayerNames() {
-      const regExp = /^[a-zA-Z]{2,10}$/
-      let p1n = this.p1Name.value
-      let p2n = this.p2Name.value
-
-      if ((p1n == p2n) || (!regExp.test(p1n) && !regExp.test(p2n))) {
-         this.p1Name.classList.add('invalid')
-         this.p2Name.classList.add('invalid')
-         return false
-
-      } else if (!regExp.test(p1n)) {
-         this.p1Name.classList.add('invalid')
-         return false
-
-      } else if (!regExp.test(p2n)) {
-         this.p2Name.classList.add('invalid')
-         return false
-
-      } else {
-         this.p1Name.classList.remove('invalid')
-         this.p2Name.classList.remove('invalid')
-         console.log('correct p1 p2')
-         return true
-      }
-   }
-
-   DisableMenuParts(boolean) {
-      if (boolean == true) {
-         this.beginGameBtn.setAttribute('disabled', 'disabled')
-         this.options.setAttribute('disabled', 'disabled')
-         this.p1Name.setAttribute('disabled', 'disabled')
-         this.p2Name.setAttribute('disabled', 'disabled')
-      } else {
-         console.log('boolean: ' + boolean)
-      }
+   DisableMenuParts() {
+      this.beginGameBtn.setAttribute('disabled', 'disabled')
+      this.options.setAttribute('disabled', 'disabled')
    }
 }

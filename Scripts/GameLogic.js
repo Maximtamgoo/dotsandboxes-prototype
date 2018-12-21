@@ -1,37 +1,43 @@
 'use strict'
 class GameLogic {
    constructor() {
-      this.test = document.getElementById('test')
+      // this.test = document.getElementById('test')
       this.currentPlayer
       this.currentPlayerName
       this.currentColor
       this.selectedCoordIndex
       this.player_1_Score = 0
-      this.player_1_Color = 'red'
+      this.player_1_Color = 'orange'
       this.player_2_Score = 0
-      this.player_2_Color = 'blue'
+      this.player_2_Color = '#007bff'
    }
 
    SetCurrentPlayer(currentPlayer, playerName, color) {
       this.currentPlayer = currentPlayer
       this.currentColor = color
       this.currentPlayerName = playerName
+      console.log(this.currentColor)
+
       // Hovering Line Color
-      document.styleSheets[1].cssRules[6].style.backgroundColor = this.currentColor
+      document.styleSheets[0].cssRules[5].style.backgroundColor = this.currentColor
+      document.styleSheets[0].cssRules[6].style.backgroundColor = this.currentColor
       // Display player's turn
-      document.querySelector('#player-turn').textContent = `${this.currentPlayerName}'s Turn (${this.currentColor})`
+      document.querySelector('#player-turn').textContent = `${this.currentPlayerName}'s Turn`
+      document.querySelector('#player-turn').style.backgroundColor = this.player_1_Color
    }
 
    SwitchPlayers() {
       if (this.currentPlayer === 1) {
-         this.SetCurrentPlayer(2, menuObj.p2Name.value, 'blue')
+         this.SetCurrentPlayer(2, 'Player Two', 'blue')
+         document.querySelector('#player-turn').style.backgroundColor = this.player_2_Color
       } else {
-         this.SetCurrentPlayer(1, menuObj.p1Name.value, 'red')
+         this.SetCurrentPlayer(1, 'Player One', 'orange')
+         document.querySelector('#player-turn').style.backgroundColor = this.player_1_Color
       }
    }
 
    CreateCoordinatesListener() {
-      let allLines = document.querySelectorAll('.h, .v')
+      let allLines = document.querySelectorAll('.grid-h-col, .grid-v-col')
       let eachLine = Array.from(allLines)
       eachLine.forEach(line => {
          line.addEventListener('click', this.GetCoords)
@@ -58,7 +64,7 @@ class GameLogic {
       // }
 
       let x, y
-      if (line.className === 'h' || line.className === 'v') {
+      if (line.className === 'grid-h-col' || line.className === 'grid-v-col') {
          x = Number(line.attributes.x.value)
          y = Number(line.attributes.y.value)
          gameLogic.RunMove(line, x, y)
@@ -68,7 +74,7 @@ class GameLogic {
    RunMove(line, x, y) {
       console.log('RunMove', x, y)
 
-      this.test.textContent = `${x}, ${y}`
+      // this.test.textContent = `${x}, ${y}`
       this.RemoveLineListener(line)
       this.FindIndexOfSelectedCoord_and_SetCoordToTaken(x, y)
 
@@ -78,19 +84,12 @@ class GameLogic {
          this.SetAndStyleTheScore(boxCoordIndexes.length)
       } else {
          this.SwitchPlayers()
-            
       }
 
-      // check coordList if taken, set to taken
-      // check boxList if a box is full
-      // score
-      // winner? => reset/play again
-      // set playerTurn to opposite player
       let noMovesLeft = gridObj.coordList.every((e) => e.taken === true)
       if (noMovesLeft) {
          this.EndGame()
       }
-      // return
    }
 
    FindIndexOfSelectedCoord_and_SetCoordToTaken(xx, yy) {
@@ -101,10 +100,10 @@ class GameLogic {
    CheckForBox() {
       let gridSize = gridObj.gridSize
       let coordList = gridObj.coordList
-      
+
       let orient = coordList[this.selectedCoordIndex].orient
       let surroundingLineIndexesList = findIndexes.FindSurroundingLineIndexes(this.selectedCoordIndex, orient, gridSize, coordList)
-      console.log('surroundingLineIndexesList',surroundingLineIndexesList)
+      console.log('surroundingLineIndexesList', surroundingLineIndexesList)
 
       let foundBox1 = false
       let foundBox2 = false
@@ -123,16 +122,16 @@ class GameLogic {
 
    }
 
-   SetAndStyleTheScore(numOfBoxes){
+   SetAndStyleTheScore(numOfBoxes) {
       let scoreDiv = document.querySelector(`#player-${this.currentPlayer}-score`)
       if (this.currentPlayer === 1) {
          this.player_1_Score += numOfBoxes
-         scoreDiv.textContent = `${menuObj.p1Name.value}: ${this.player_1_Score}`
+         scoreDiv.textContent = `Player One: ${this.player_1_Score}`
       } else {
          this.player_2_Score += numOfBoxes
-         scoreDiv.textContent = `${menuObj.p2Name.value}: ${this.player_2_Score}`
+         scoreDiv.textContent = `Player Two: ${this.player_2_Score}`
       }
-      
+
    }
 
    StyleTheBoxes(boxCoordIndexes) {
@@ -146,6 +145,16 @@ class GameLogic {
    }
 
    EndGame() {
-      this.test.textContent = 'No Moves Left'
+      // this.test.textContent = 'No Moves Left'
+      let p1Score = this.player_1_Score
+      let p2Score = this.player_2_Score
+      console.log(p1Score, p2Score)
+
+      if (p1Score === p2Score) {
+         document.querySelector('#player-turn').textContent = 'Tie!'
+      } else {
+         let status = (p1Score > p2Score) ? 'Player One Wins!' : 'Player Two Wins!'
+         document.querySelector('#player-turn').textContent = status
+      } 
    }
 }
