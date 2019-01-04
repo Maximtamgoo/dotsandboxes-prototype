@@ -28,7 +28,7 @@ class GameLogic {
 
    SwitchPlayers() {
       if (this.currentPlayer === 1) {
-         this.SetCurrentPlayer(2, 'Player Two', 'blue')
+         this.SetCurrentPlayer(2, 'Player Two', '#007bff')
          document.querySelector('#player-turn').style.backgroundColor = this.player_2_Color
       } else {
          this.SetCurrentPlayer(1, 'Player One', 'orange')
@@ -150,11 +150,17 @@ class GameLogic {
       let p2Score = this.player_2_Score
       console.log(p1Score, p2Score)
 
+      let status = ''
       if (p1Score === p2Score) {
-         document.querySelector('#player-turn').textContent = 'Tie!'
+         status = 'Tie!'
+         document.querySelector('#player-turn').style.backgroundColor = 'black'
+      } else if (p1Score > p2Score) {
+         status = 'Player One Wins!'
+         document.querySelector('#player-turn').style.backgroundColor = 'orange'
       } else {
-         let status = (p1Score > p2Score) ? 'Player One Wins!' : 'Player Two Wins!'
-         document.querySelector('#player-turn').textContent = status
-      } 
+         status = 'Player Two Wins!'
+         document.querySelector('#player-turn').style.backgroundColor = '#007bff'
+      }
+      document.querySelector('#player-turn').textContent = status
    }
 }
